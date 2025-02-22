@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Form - GET vs POST</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        form {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>University Registration Form</h1>
+
+    <h2>GET Request</h2>
+    <form action="/g25" method="get">
+        <input type="text" name="name" placeholder="Enter Full Name" required>
+        <input type="text" name="roll_no" placeholder="Enter Roll Number" required>
+        <input type="email" name="email" placeholder="Enter Email ID" required>
+        <input type="text" name="degree" placeholder="Enter Degree Name" required>
+        <input type="text" name="batch" placeholder="Enter Batch Year (e.g., 2021-2025)" required>
+        <input type="submit" value="Submit GET">
+    </form>
+
+    <h2>POST Request</h2>
+    <form action="/g25" method="post">
+        <input type="text" name="name" placeholder="Enter Full Name" required>
+        <input type="text" name="roll_no" placeholder="Enter Roll Number" required>
+        <input type="email" name="email" placeholder="Enter Email ID" required>
+        <input type="text" name="degree" placeholder="Enter Degree Name" required>
+        <input type="text" name="batch" placeholder="Enter Batch Year (e.g., 2021-2025)" required>
+        <input type="submit" value="Submit POST">
+    </form>
+</body>
+</html>

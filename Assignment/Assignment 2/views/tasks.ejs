@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <div class="header">
+            <h1>TODO LIST</h1>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search note...">
+            <button class="filter-button">ALL</button>
+            <button class="theme-toggle" id="themeToggle"><i class="fas fa-adjust"></i></button>
+        </div>
+
+        <div class="task-list">
+            <% tasks.forEach(task => { %>
+                <div class="task-item <%= task.completed ? 'task-completed' : '' %>" data-id="<%= task.id %>">
+                    <div class="task-checkbox <%= task.completed ? 'completed' : '' %>" onclick="toggleTask(`<%= task.id %>`)">
+                        <% if (task.completed) { %>✓<% } %>
+                    </div>
+                    <span><%= task.title %></span>
+                </div>
+            <% }); %>
+        </div>
+
+        <button class="add-button" onclick="showModal()">+</button>
+    </div>
+
+    <div class="modal" id="addTaskModal">
+        <div class="modal-content">
+            <h2>NEW NOTE</h2>
+            <form action="/add-task" method="POST">
+                <input type="text" name="title" placeholder="Add your note..." required>
+                <div class="modal-buttons">
+                    <button type="button" onclick="hideModal()">CANCEL</button>
+                    <button type="submit">APPLY</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+        });
+
+        function showModal() {
+            document.getElementById('addTaskModal').style.display = 'block';
+        }
+
+        function hideModal() {
+            document.getElementById('addTaskModal').style.display = 'none';
+        }
+
+        function toggleTask(id) {
+            fetch(`/toggle-task/${id}`, { method: 'POST' })
+                .then(() => window.location.reload());
+        }
+
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.task-item').forEach(task => {
+                const taskText = task.querySelector('span').textContent.toLowerCase();
+                task.style.display = taskText.includes(searchTerm) ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

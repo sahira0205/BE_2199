@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Details</title>
+</head>
+<body>
+    <a href="/tasks" class="back-btn">Back to Tasks</a>
+    <div class="task-details">
+        <h1><%= task.title %></h1>
+        <p><%= task.description %></p>
+        <p>Status: <%= task.status %></p>
+        <p>Created: <%= new Date(task.createdAt).toLocaleString() %></p>
+    </div>
+</body>
+</html>
